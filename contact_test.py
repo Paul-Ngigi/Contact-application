@@ -1,4 +1,5 @@
 import unittest
+import pyperclip
 from contact import Contact
 
 
@@ -87,6 +88,15 @@ class TestContact(unittest.TestCase):
         test_display_all_contacts test case tests if one can return a list of saved contacts
         """
         self.assertEqual(Contact.display_contacts(), Contact.contact_list)
+
+    def test_copy_email(self):
+        """
+        Test to confirm we are copying email address from a found contact
+        """
+        self.new_contact.save_contact()
+        Contact.copy_email("0714060467")
+
+        self.assertEqual(self.new_contact.email, pyperclip.paste())
 
 
 if __name__ == '__main__':
